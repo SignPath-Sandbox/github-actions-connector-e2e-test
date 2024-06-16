@@ -1,6 +1,5 @@
-# this workflow is used to test the happy path of the e2e tests using the paid runner
-# to make sure that we can distinguish between the paid and the default runner
-name: e2e happy path paid runner tests
+# this workflow is used to test the e2e happy path of the signpath/github-action-submit-signing-request action
+name: e2e code scanning rule test
 
 on:
     workflow_dispatch:
@@ -21,7 +20,7 @@ jobs:
       workflow-dispatch-event-id: ${{ inputs.workflow-dispatch-event-id }}
       environment: ${{ inputs.environment }}
   build:
-    runs-on: e2e-tests-runner
+    runs-on: windows-latest
     environment: ${{ inputs.environment }}
     steps:
       - name: Checkout
@@ -41,9 +40,11 @@ jobs:
             organization-id: ${{ vars.ORGANIZATION_ID }}
             project-slug: e2e-gha-test-project
             # this SigningPolicy has auto-approve enabled, so you don't need to approve the signing request
-            signing-policy-slug: e2e-test-sp
+            signing-policy-slug: e2e-test-sp-code-scanning
             artifact-configuration-slug: exe-in-zip
             github-artifact-id: '${{ steps.upload-artifact-step.outputs.artifact-id }}'
-            github-extended-verification-token: '${{ secrets.EXTENDED_VERIFICATION_TOKEN }}'
             wait-for-completion: true
             output-artifact-directory: signed-artifact
+            github-extended-verification-token: '${{ secrets.EXTENDED_VERIFICATION_TOKEN }}'
+            
+     
