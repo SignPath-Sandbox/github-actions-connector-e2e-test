@@ -38,7 +38,7 @@ jobs:
           path: ./artifacts/small.exe
       - name: Run submit signing request
         id: submit_with_download
-        uses: signpath/github-action-submit-signing-request@f91ea7b
+        uses: signpath/github-action-submit-signing-request@f91ea7bcb0a73b91328678e2c19213472264d19a
         with:
             connector-url: ${{ vars.CONNECTOR_URL }}
             api-token: '${{ secrets.SIGNPATH_API_TOKEN }}'
