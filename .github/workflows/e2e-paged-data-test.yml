@@ -12,6 +12,11 @@ on:
         workflow-dispatch-event-id:
           required: true
           type: string
+        connector-url:
+          required: false
+          type: string
+          default: ''
+          description: 'SignPath connector URL (defaults to environment variable)'
         comment:
           required: false
           type: string
@@ -276,7 +281,7 @@ jobs:
         id: submit_with_download
         uses: signpath/github-action-submit-signing-request@main
         with:
-            connector-url: ${{ vars.CONNECTOR_URL }}
+            connector-url: ${{ inputs.connector-url || vars.CONNECTOR_URL }}
             api-token: '${{ secrets.SIGNPATH_API_TOKEN }}'
             organization-id: ${{ vars.ORGANIZATION_ID }}
             # this SigningPolicy has auto-approve enabled, so you don't need to approve the signing request

@@ -10,6 +10,11 @@ on:
         workflow-dispatch-event-id:
           required: true
           type: string
+        connector-url:
+          required: false
+          type: string
+          default: ''
+          description: 'SignPath connector URL (defaults to environment variable)'
         comment:
           required: false
           type: string
@@ -30,5 +35,6 @@ jobs:
       SIGNPATH_API_TOKEN: ${{ secrets.SIGNPATH_API_TOKEN }}
     with:
       environment: ${{ inputs.environment }}
+      connector-url: ${{ inputs.connector-url || vars.CONNECTOR_URL }}
       artifact-path: ./artifacts/small.exe
       signing-policy-slug: e2e-test-sp
