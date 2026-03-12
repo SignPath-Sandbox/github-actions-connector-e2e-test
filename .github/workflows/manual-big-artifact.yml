@@ -35,13 +35,13 @@ jobs:
         uses: actions/checkout@v3
       - name: Generate artifact
         shell: pwsh
-        run: ./Generate-Artifact.ps1 -SizeMB ${{ inputs.fileSizeMB }} -OutputFile generated.exe
+        run: ./Generate-Artifact.ps1 -SizeMB ${{ inputs.fileSizeMB }} -OutputFile ./generated.exe
       - name: Upload the artifcat file
         id: upload-artifact-step
         uses: actions/upload-artifact@v4
         with: 
           name: original-artifact
-          path: ./artifacts/generated.exe
+          path: ./generated.exe
       - name: Run submit signing request
         id: submit_with_download
         uses: signpath/github-action-submit-signing-request@main
