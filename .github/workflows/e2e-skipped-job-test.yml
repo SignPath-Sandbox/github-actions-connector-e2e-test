@@ -10,9 +10,9 @@ on:
           required: true
           type: string
         connector-url:
-          required: false
+          required: true
           type: string
-          description: 'SignPath connector URL (defaults to environment variable)'
+          description: 'SignPath connector URL'
         comment:
           required: false
           type: string
@@ -40,7 +40,7 @@ jobs:
       SIGNPATH_API_TOKEN: ${{ secrets.SIGNPATH_API_TOKEN }}
     with:
       environment: ${{ inputs.environment }}
-      connector-url: ${{ case(inputs.connector-url == '', vars.CONNECTOR_URL, inputs.connector-url) }}
+      connector-url: ${{ inputs.connector-url }}
       artifact-path: ./artifacts/small.exe
       signing-policy-slug: e2e-test-sp
       output-artifact-directory: C:/signpath-output/signed-artifact
