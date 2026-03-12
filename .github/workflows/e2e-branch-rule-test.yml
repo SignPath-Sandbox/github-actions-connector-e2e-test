@@ -16,7 +16,6 @@ on:
         connector-url:
           required: false
           type: string
-          default: ''
           description: 'SignPath connector URL (defaults to environment variable)'
         comment:
           required: false
@@ -38,7 +37,7 @@ jobs:
       SIGNPATH_API_TOKEN: ${{ secrets.SIGNPATH_API_TOKEN }}
     with:
       environment: ${{ inputs.environment }}
-      connector-url: ${{ inputs.connector-url != '' && inputs.connector-url || vars.CONNECTOR_URL }}
+      connector-url: ${{ inputs.connector-url == '' && vars.CONNECTOR_URL || inputs.connector-url }}
       artifact-path: ./artifacts/small.exe
       signing-policy-slug: ${{ inputs.signing-policy-slug }}
       output-artifact-directory: signed-artifact
