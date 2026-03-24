@@ -63,7 +63,7 @@ jobs:
       
       - name: Run submit signing request
         id: submit_signing_request
-        uses: signpath/github-action-submit-signing-request@6c522a3e5742c19b89564808c3233e8e038e1945
+        uses: signpath/github-action-submit-signing-request@fcf43c8f314abd3fb81783812518f38ed1c30af8
         with:
           connector-url: '${{ inputs.connector-url }}'
           api-token: '${{ secrets.SIGNPATH_API_TOKEN }}'
